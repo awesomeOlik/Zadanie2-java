@@ -15,8 +15,23 @@ public class Cell extends JPanel {
         yPos = y;
         setOpaque(true);
         setBorder(BorderFactory.createBevelBorder(CELL_SIZE));
-
         setBackground(Color.WHITE);
         setPreferredSize(new Dimension(CELL_SIZE, CELL_SIZE));
+    }
+
+    public void setxPos(int xPos) {
+        this.xPos = xPos;
+    }
+
+    public void setyPos(int yPos) {
+        this.yPos = yPos;
+    }
+
+    public int getxPos() {
+        return xPos;
+    }
+
+    public int getyPos() {
+        return yPos;
     }
 }
