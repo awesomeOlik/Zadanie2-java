@@ -7,18 +7,16 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.*;
 import java.util.stream.IntStream;
 
 
 public class Grid extends JPanel {
     public static final int GRID_SIZE = 11;
-    Square point=new Square();
+    Square point;
     Cell[][] field = new Cell[GRID_SIZE][GRID_SIZE];
     public Grid() {
+        this.point=new Square(0,0);
         setPreferredSize(new Dimension(300, 300));
         setLayout(new GridLayout(GRID_SIZE, GRID_SIZE));
         setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -71,7 +69,7 @@ public class Grid extends JPanel {
                     }
                     @Override
                     public void mouseEntered(MouseEvent e) {
-                        //toto iste je v js tak som to dal, ale mozete to nahradit forom
+
                         IntStream.range(1, GRID_SIZE).forEach(key -> field[point.getPointx()][key].setBackground(Color.CYAN));
                         IntStream.range(1, GRID_SIZE).forEach(key -> field[key][point.getPointx()].setBackground(Color.CYAN));
                     }
@@ -86,6 +84,12 @@ public class Grid extends JPanel {
             }
         }
     }
+    public void repaint(int x1,int y1,int x2, int y2){
+            field[x1][y1].setBackground(Color.WHITE);
+            field[x2][y2].setBackground(Color.RED);
+
+    }
+
 
 }
 
