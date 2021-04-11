@@ -1,49 +1,43 @@
 package Uloha;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class Main {
     public static void main(String[] args){
         Grid application = new Grid();
         application.draw();
         JFrame frame = new JFrame();
-        var button=(new JButton("^"));
+        var up=(new JButton("^"));
         var buttonPanel=new JPanel();
         buttonPanel.setVisible(true);
-        buttonPanel.add(button);
+        buttonPanel.add(up);
         buttonPanel.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 0;
-        button.setPreferredSize(new Dimension(50,30));
-        buttonPanel.add(button,c);
+        up.setPreferredSize(new Dimension(50,30));
+        buttonPanel.add(up,c);
 
-        JButton button1 = new JButton("<");
+        JButton left = new JButton("<");
         c.weightx = 0.5;
         c.gridx = 0;
         c.gridy = 1;
-        button1.setPreferredSize(new Dimension(50,30));
-        buttonPanel.add(button1,c);
+        left.setPreferredSize(new Dimension(50,30));
+        buttonPanel.add(left,c);
 
-        JButton button2 = new JButton("v");
+        JButton down = new JButton("v");
         c.weightx = 0.5;
         c.gridx = 1;
         c.gridy = 1;
-        button2.setPreferredSize(new Dimension(50,30));
-        buttonPanel.add(button2,c);
+        down.setPreferredSize(new Dimension(50,30));
+        buttonPanel.add(down,c);
 
-        JButton button3 = new JButton(">");
-        //c.weightx = 0.5;
+        JButton right = new JButton(">");
         c.gridx = 2;
         c.gridy = 1;
-        button3.setPreferredSize(new Dimension(50,30));
-        buttonPanel.add(button3,c);
+        right.setPreferredSize(new Dimension(50,30));
+        buttonPanel.add(right,c);
 
         JButton reset = new JButton("Reset");
         c.ipady = 20;      //make this component tall
@@ -58,7 +52,7 @@ public class Main {
         buttonPanel.setBackground(Color.CYAN);
 
 
-        button2.setPreferredSize(new Dimension(50,30));
+        down.setPreferredSize(new Dimension(50,30));
         buttonPanel.add(reset,c);
 
         frame.setLayout(new BorderLayout());
@@ -69,31 +63,11 @@ public class Main {
         frame.add(application,BorderLayout.CENTER);
         frame.add(buttonPanel,BorderLayout.LINE_START);
 
-        button.addMouseListener(new MouseListener() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                button.setBackground(Color.BLACK);
-//TODO na kliknutie treba preklesit plochu a zobrazit novu polohu stvovrca
 
-            }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-
-            }
-        });
-
-
+        down.addActionListener(e -> application.repaint(application.point.getPointx(),application.point.getPointy(),application.point.setPointx(application.point.getPointx()+1),application.point.getPointy()));
+        up.addActionListener(e -> application.repaint(application.point.getPointx(),application.point.getPointy(),application.point.setPointx(application.point.getPointx()-1),application.point.getPointy()));
+        left.addActionListener(e -> application.repaint(application.point.getPointx(),application.point.getPointy(),application.point.getPointx(),application.point.setPointy(application.point.getPointy()-1)));
+        right.addActionListener(e -> application.repaint(application.point.getPointx(),application.point.getPointy(),application.point.getPointx(),application.point.setPointy(application.point.getPointy()+1)));
 
     }
 }
